@@ -84,8 +84,6 @@ def _run_objcopy(args):
             "-j",
             ".text",
             "-j",
-            ".sbat",
-            "-j",
             ".sdata",
             "-j",
             ".data",
@@ -95,6 +93,15 @@ def _run_objcopy(args):
             ".dynsym",
             "-j",
             ".rel*",
+        ]
+        if args.sbat_distro_id:
+            argv += [
+                "-j",
+                ".sbat",
+                "--set-section-alignment",
+                ".sbat=512",
+            ]
+        argv += [
             tfd.name,
             args.outfile,
         ]
